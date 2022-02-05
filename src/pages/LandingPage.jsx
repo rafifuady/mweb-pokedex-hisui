@@ -1,6 +1,7 @@
 import { Button, Paper, Stack, styled, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { BackgroundItem } from "../common/components/BackgroundItem";
 import { createGradient } from "../common/utils/createGradient";
 
 const DUMMY_SEEN = 100;
@@ -11,13 +12,6 @@ const ButtonAction = styled(Button)(({ theme }) => ({
   "&:hover": {
     backgroundColor: "#ebe7ca",
   },
-}));
-
-const BackgroundPaper = styled(Paper)(({ theme }) => ({
-  color: theme.palette.getContrastText("#ede6de"),
-  backgroundColor: "#ede6de",
-  paddingInline: theme.spacing(3),
-  paddingBlock: theme.spacing(2),
 }));
 
 const AccentPaper = styled(Paper)(({ theme }) => ({
@@ -55,11 +49,11 @@ function LandingPage() {
           alignItems="center"
           spacing={2}
         >
-          <BackgroundPaper elevation={5}>
+          <BackgroundItem elevation={5}>
             <Typography variant="h2" sx={{ fontWeight: 500 }}>
               POKEDEX
             </Typography>
-          </BackgroundPaper>
+          </BackgroundItem>
           <Stack
             direction="row"
             justifyContent="space-evenly"
