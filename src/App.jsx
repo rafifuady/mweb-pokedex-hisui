@@ -27,7 +27,6 @@ function App({ emotionCache = clientSideEmotionCache }) {
         <Provider store={store}>
           <CssBaseline />
           <AppRoutes />
-          POKEDEX
         </Provider>
       </ThemeProvider>
     </CacheProvider>
