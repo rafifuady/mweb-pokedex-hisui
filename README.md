@@ -11,7 +11,10 @@ styles: global theme
 jsx: React Component
 js: Non React Component
 
-
+## colors
+3b3b33, 4c4940 brown
+344e67, 456479 blue
+ebe7ca, ede6de yelowish with
 
 # Getting Started with Create React App
 
