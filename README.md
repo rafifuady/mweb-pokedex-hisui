@@ -1,3 +1,18 @@
+# Code Convention
+
+## Folder Structure
+common : shared components
+module : page specific components
+pages : page components
+routes: for routing 
+styles: global theme
+
+## Naming file
+jsx: React Component
+js: Non React Component
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
