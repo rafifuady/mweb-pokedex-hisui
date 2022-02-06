@@ -33,7 +33,7 @@ const TitleBox = styled(Box)(({ theme }) => ({
 
 function PokemonDetail({ detail }) {
   const dispatch = useDispatch();
-  const pokemon = useSelector(state => state.pokemon);
+  const pokemon = useSelector((state) => state.pokemon);
 
   const [capture, setCapture] = useState(false);
   const [pokeball, setPokeball] = useState(false);
@@ -44,8 +44,8 @@ function PokemonDetail({ detail }) {
   const [modalNickname, setModalNickname] = useState(false);
 
   const handleModal = () => {
-    setModalNickname((val) => !val)
-    setErrorMessage()
+    setModalNickname((val) => !val);
+    setErrorMessage();
   };
 
   const handleCapture = () => {
@@ -74,7 +74,7 @@ function PokemonDetail({ detail }) {
   }, [capture]);
 
   useEffect(() => {
-    (!pokemon.isError) ? handleModal() :  setErrorMessage(pokemon.message)
+    !pokemon.isError ? handleModal() : setErrorMessage(pokemon.message);
   }, [pokemon]);
 
   return (
@@ -104,9 +104,21 @@ function PokemonDetail({ detail }) {
           ))}
         </Stack>
       </TitleBox>
-      <Box sx={{ maxHeight: "100px", maxWidth: "100px",}}>
-        {!pokeball  &&<img style={{ padding: "1px" }} src={detail?.sprites?.front_default} alt="front_default" />}
-        {pokeball  && <img style={{ height: "96px", width: "96px"}} src="/pokeball.gif" alt="pokebal" /> }
+      <Box sx={{ maxHeight: "150", maxWidth: "150" }}>
+        {!pokeball && (
+          <img
+            style={{ height: "146px", width: "auto", padding: "1px" }}
+            src={detail?.sprites?.front_default}
+            alt="front_default"
+          />
+        )}
+        {pokeball && (
+          <img
+            style={{ height: "146px", width: "146px" }}
+            src="/pokeball.gif"
+            alt="pokebal"
+          />
+        )}
       </Box>
       <Container>
         {capture && (
@@ -123,7 +135,11 @@ function PokemonDetail({ detail }) {
             </DialogContent>
             <DialogActions>
               <Button onClick={() => handleModal()} children="Release" />
-              <Button onClick={() => handleSaving()} type="submit" children="Save" />
+              <Button
+                onClick={() => handleSaving()}
+                type="submit"
+                children="Save"
+              />
             </DialogActions>
           </Dialog>
         )}
@@ -146,7 +162,6 @@ function PokemonDetail({ detail }) {
           ))}
         </List>
       </Container>
-      <Box>#{detail?.id} Bulbasaur Type</Box>
     </Stack>
   );
 }
