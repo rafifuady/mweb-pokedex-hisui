@@ -12,6 +12,8 @@ function savePokemon(payload) {
       type: pokemonConstants.SAVE_REQUEST,
       payload: {
         isloading: true,
+        isError: false,
+        message: "",
       },
     });
 

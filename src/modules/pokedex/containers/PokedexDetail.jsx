@@ -8,9 +8,17 @@ import {
   ListItem,
   ListItemText,
   Button,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ButtonTypingPokemon from "../../../common/components/ButtonTypingPokemon";
+import { pokemonActions } from "../../pokemon/_redux/pokemon.action";
 
 const TitleBox = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -24,24 +32,50 @@ const TitleBox = styled(Box)(({ theme }) => ({
 }));
 
 function PokemonDetail({ detail }) {
+  const dispatch = useDispatch();
+  const pokemon = useSelector(state => state.pokemon);
+
   const [capture, setCapture] = useState(false);
   const [pokeball, setPokeball] = useState(false);
+
+  const [nickname, setNickname] = useState("");
+  const [errorMessage, setErrorMessage] = useState();
+
+  const [modalNickname, setModalNickname] = useState(false);
+
+  const handleModal = () => {
+    setModalNickname((val) => !val)
+    setErrorMessage()
+  };
+
   const handleCapture = () => {
     let rngCapture;
     setCapture(false);
     setPokeball(true);
-    rngCapture =  Math.floor((Math.random() * 10) + 1)
+    rngCapture = Math.floor(Math.random() * 10 + 1);
     setTimeout(() => {
       if (rngCapture > 5) setCapture(true);
       setPokeball(false);
     }, 500);
   };
 
+  const handleSaving = (e) => {
+    let savedPokemon = {
+      ...detail,
+      nickname: nickname,
+    };
+    dispatch(pokemonActions?.savePokemon(savedPokemon));
+  };
+
   useEffect(() => {
     if (capture) {
-
+      handleModal();
     }
   }, [capture]);
+
+  useEffect(() => {
+    (!pokemon.isError) ? handleModal() :  setErrorMessage(pokemon.message)
+  }, [pokemon]);
 
   return (
     <Stack
@@ -70,14 +104,29 @@ function PokemonDetail({ detail }) {
           ))}
         </Stack>
       </TitleBox>
-      <Box>
-        <img src={detail?.sprites?.front_default} alt="front_default" />
-        <img src={detail?.sprites?.back_default} alt="back_default" />
+      <Box sx={{ maxHeight: "100px", maxWidth: "100px",}}>
+        {!pokeball  &&<img style={{ padding: "1px" }} src={detail?.sprites?.front_default} alt="front_default" />}
+        {pokeball  && <img style={{ height: "96px", width: "96px"}} src="/pokeball.gif" alt="pokebal" /> }
       </Box>
       <Container>
-        {pokeball && <img src="/pokeball.gif" alt="pokebal" />}
-        {pokeball && "CAPTURING..."}
-        {capture && "CAPTURED..."}
+        {capture && (
+          <Dialog open={modalNickname} onClose={handleModal}>
+            <DialogTitle>Pokemon Caught!</DialogTitle>
+            <DialogContent>
+              <TextField
+                label="nickname"
+                variant="standard"
+                onChange={(e) => setNickname(e.target.value)}
+                error={errorMessage ? true : false}
+                helperText={errorMessage}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => handleModal()} children="Release" />
+              <Button onClick={() => handleSaving()} type="submit" children="Save" />
+            </DialogActions>
+          </Dialog>
+        )}
         <Button
           variant="contained"
           color="primary"
