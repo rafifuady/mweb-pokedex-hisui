@@ -51,8 +51,8 @@ function PokemonDetail({detail}) {
         </Stack>
       </TitleBox>
       <Box>
-        <img src={detail?.sprites?.front_default} />
-        <img src={detail?.sprites?.back_default} />
+        <img src={detail?.sprites?.front_default} alt="front_default" />
+        <img src={detail?.sprites?.back_default} alt="back_default"/>
       </Box>
       <Container>
         <Button variant="contained" color="primary" fullWidth>

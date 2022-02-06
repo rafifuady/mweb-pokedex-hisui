@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { Box, styled, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import MainLayout from "../../common/layouts/MainLayout";
 import { createGradient } from "../../common/utils/createGradient";
-import PokemonDetail from "../../modules/pokedex/containers/PokemonDetail";
+import PokemonDetail from "../../modules/pokedex/containers/PokedexDetail";
 
 import { pokedexActions } from "../../modules/pokedex/_redux/pokedex.actions";
 
@@ -15,9 +15,8 @@ function PokedexDetailPage() {
 
   const { detail } = useSelector((state) => state.pokedex);
 
-  useEffect(() => {
-    dispatch(pokedexActions.getDetail(pokeId));
-  }, [pokeId]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => dispatch(pokedexActions.getDetail(pokeId)), [pokeId]);
 
   return (
     <MainLayout>
