@@ -9,6 +9,7 @@ import {
   ListItemText,
   Button,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 import ButtonTypingPokemon from "../../../common/components/ButtonTypingPokemon";
 
 const TitleBox = styled(Box)(({ theme }) => ({
@@ -22,7 +23,26 @@ const TitleBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
-function PokemonDetail({detail}) {
+function PokemonDetail({ detail }) {
+  const [capture, setCapture] = useState(false);
+  const [pokeball, setPokeball] = useState(false);
+  const handleCapture = () => {
+    let rngCapture;
+    setCapture(false);
+    setPokeball(true);
+    rngCapture =  Math.floor((Math.random() * 10) + 1)
+    setTimeout(() => {
+      if (rngCapture > 5) setCapture(true);
+      setPokeball(false);
+    }, 500);
+  };
+
+  useEffect(() => {
+    if (capture) {
+
+    }
+  }, [capture]);
+
   return (
     <Stack
       direction="column"
@@ -52,10 +72,18 @@ function PokemonDetail({detail}) {
       </TitleBox>
       <Box>
         <img src={detail?.sprites?.front_default} alt="front_default" />
-        <img src={detail?.sprites?.back_default} alt="back_default"/>
+        <img src={detail?.sprites?.back_default} alt="back_default" />
       </Box>
       <Container>
-        <Button variant="contained" color="primary" fullWidth>
+        {pokeball && <img src="/pokeball.gif" alt="pokebal" />}
+        {pokeball && "CAPTURING..."}
+        {capture && "CAPTURED..."}
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={handleCapture}
+        >
           CATCH
         </Button>
       </Container>
