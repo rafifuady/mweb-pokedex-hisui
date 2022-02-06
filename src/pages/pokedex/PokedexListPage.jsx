@@ -32,7 +32,7 @@ function PokedexListPage() {
   const navigate = useNavigate();
 
   const limit = 5;
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [offset, setOffset] = useState(0);
 
   const handleChangePage = (event, newPage) => {
@@ -47,6 +47,7 @@ function PokedexListPage() {
         offset,
       })
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, offset]);
 
   return (
@@ -83,7 +84,7 @@ function PokedexListPage() {
                     onClick={() =>
                       navigate(
                         `/pokedex/${
-                          page === 1 ? index + 1 : limit * page + index + 1
+                          page === 1 ? index + 1 : limit * (page - 1) + index + 1
                         }`
                       )
                     }
@@ -93,7 +94,7 @@ function PokedexListPage() {
                         component="div"
                         variant="subtitle"
                         children={`# ${
-                          page === 1 ? index + 1 : limit * page + index + 1
+                          page === 1 ? index + 1 : limit * (page - 1) + index + 1
                         }`}
                       />
                     </Container>
