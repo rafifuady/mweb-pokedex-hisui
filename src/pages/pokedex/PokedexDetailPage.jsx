@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Box, Stack } from "@mui/material";
+import { Box, LinearProgress, Stack } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -13,10 +13,15 @@ function PokedexDetailPage() {
   const { pokeId } = useParams();
   const dispatch = useDispatch();
 
-  const { detail } = useSelector((state) => state.pokedex);
+  const { detail, isLoading } = useSelector((state) => state.pokedex);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => dispatch(pokedexActions.getDetail(pokeId)), [pokeId]);
+  useEffect(() => {
+    dispatch(pokedexActions.getDetail(pokeId));
+    return () => {
+      dispatch(pokedexActions.resetDetail());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pokeId]);
 
   return (
     <MainLayout>
@@ -33,7 +38,12 @@ function PokedexDetailPage() {
             background: createGradient("#ede6de", "#ebe7ca"),
           }}
         >
-          {detail && <PokemonDetail detail={detail} />}
+          {isLoading && (
+            <Box sx={{ width: "100%" }}>
+              <LinearProgress />
+            </Box>
+          )}
+          {!isLoading && detail && <PokemonDetail detail={detail} />}
         </Box>
       </Stack>
     </MainLayout>
