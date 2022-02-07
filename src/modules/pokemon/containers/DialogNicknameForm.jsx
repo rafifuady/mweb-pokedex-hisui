@@ -22,8 +22,10 @@ function DialogNicknameForm({ modalNickname, handleModal, poke }) {
     e.preventDefault();
     setErrorMessage();
     let savedPokemon = {
-      ...poke,
       nickname: nickname,
+      name: poke.name,
+      sprites: poke.sprites,
+      types: poke.types
     };
     dispatch(pokemonActions?.savePokemon(savedPokemon));
   };

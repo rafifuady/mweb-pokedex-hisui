@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
  */
 import LandingPage from "../pages/LandingPage";
 import { PokedexListPage, PokedexDetailPage } from "../pages/pokedex";
+import { PokemonListPage } from "../pages/pokemon";
 
 function AppRoutes() {
   // const appState = useSelector((state) => state.appState);
@@ -26,6 +27,9 @@ function AppRoutes() {
         <Route path="pokedex">
           <Route path="" element={<PokedexListPage />} />
           <Route path=":pokeId" element={<PokedexDetailPage />} />
+        </Route>
+        <Route path="pokemon">
+          <Route path="" element={<PokemonListPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

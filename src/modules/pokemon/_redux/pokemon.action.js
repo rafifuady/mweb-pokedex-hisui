@@ -40,9 +40,9 @@ function savePokemon(payload) {
             },
           });
         } else {
-          let listSaved = JSON.parse(list)
-          listSaved.push(JSON.stringify(payload))
-          localStorage.setItem("listPokemon", JSON.stringify(listSaved))
+          let listSaved = JSON.parse(list);
+          listSaved.push(JSON.stringify(payload));
+          localStorage.setItem("listPokemon", JSON.stringify(listSaved));
           return dispatch({
             type: pokemonConstants.SAVE_SUCCESS,
             payload: {
@@ -65,4 +65,42 @@ function savePokemon(payload) {
   };
 }
 
-function getPokemonList() {}
+function getPokemonList() {
+  return async (dispatch) => {
+    dispatch({
+      type: pokemonConstants.LIST_REQUEST,
+      payload: {
+        isloading: true,
+      },
+    });
+
+    let listPoke = localStorage.getItem("listPokemon");
+
+    if (listPoke) {
+      // transform list to readable by JS
+      let parsedList = JSON.parse(listPoke);
+
+      parsedList = parsedList.map((val) => {
+        let parsedVal = JSON.parse(val);
+        return parsedVal;
+      });
+
+      return dispatch({
+        type: pokemonConstants.LIST_SUCCESS,
+        payload: {
+          isLoading: false,
+          pokemonList: parsedList
+        }
+      })
+    } else {
+      return dispatch({
+        type: pokemonConstants.LIST_FAILED,
+        payload: {
+          isLoading: false,
+          isError: true,
+          message: "Pokemon list not found"
+        }
+      })
+    }
+  };
+}
