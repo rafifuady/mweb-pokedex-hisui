@@ -1,20 +1,19 @@
+import { useEffect } from "react";
 import {
-  Pagination,
   Stack,
-  Typography,
-  Paper,
   ButtonBase,
   styled,
   Button,
-  Divider,
+  Box
 } from "@mui/material";
-import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
+
 import { BackgroundItem } from "../../common/components/BackgroundItem";
+import PokeHead from '../../common/containers/PokeHead';
 import MainLayout from "../../common/layouts/MainLayout";
 import { createGradient } from "../../common/utils/createGradient";
+
 import { pokemonActions } from "../../modules/pokemon/_redux/pokemon.action";
 
 const PokemonCard = styled(ButtonBase)(({ theme }) => ({
@@ -42,12 +41,7 @@ function PokemonListPage() {
   return (
     <MainLayout>
       <Stack direction="column">
-        <Box
-          sx={{
-            minHeight: "5vh",
-            background: createGradient("#263a52", "#456479"),
-          }}
-        />
+        <PokeHead />
         <Box
           sx={{
             minHeight: "90vh",

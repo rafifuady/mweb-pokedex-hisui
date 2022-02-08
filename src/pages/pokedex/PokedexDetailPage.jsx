@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import MainLayout from "../../common/layouts/MainLayout";
+import PokeHead from "../../common/containers/PokeHead";
 import { createGradient } from "../../common/utils/createGradient";
 import PokemonDetail from "../../modules/pokedex/containers/PokedexDetail";
 
@@ -26,12 +27,7 @@ function PokedexDetailPage() {
   return (
     <MainLayout>
       <Stack>
-        <Box
-          sx={{
-            minHeight: "5vh",
-            background: createGradient("#263a52", "#456479"),
-          }}
-        />
+        <PokeHead />
         <Box
           sx={{
             minHeight: "95vh",
