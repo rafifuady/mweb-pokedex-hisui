@@ -1,11 +1,16 @@
 import { Button, Paper, Stack, styled, Typography } from "@mui/material";
+import { CatchingPokemon } from "@mui/icons-material";
 import { Box } from "@mui/system";
+
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import { BackgroundItem } from "../common/components/BackgroundItem";
 import { createGradient } from "../common/utils/createGradient";
+import { pokedexActions } from "../modules/pokedex/_redux/pokedex.actions";
+import { pokemonActions } from "../modules/pokemon/_redux/pokemon.action";
 
-const DUMMY_SEEN = 100;
-const DUMMY_CAUGHT = 100;
 const ButtonAction = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText("#ede6de"),
   backgroundColor: "#ede6de",
@@ -25,6 +30,19 @@ const AccentPaper = styled(Paper)(({ theme }) => ({
 
 function LandingPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { pokemonList } = useSelector((state) => state.pokemon);
+  const { caughtData } = useSelector((state) => state.pokedex);
+
+  useEffect(() => {
+    dispatch(pokemonActions.getPokemonList());
+  }, []);
+
+  useEffect(() => {
+    dispatch(pokedexActions.getCaught(pokemonList));
+  }, [pokemonList]);
+
   return (
     <Stack direction="column">
       <Box
@@ -60,8 +78,12 @@ function LandingPage() {
             alignItems="center"
             spacing={2}
           >
-            <AccentPaper>Seen {DUMMY_SEEN}</AccentPaper>
-            <AccentPaper>{DUMMY_CAUGHT} Caught</AccentPaper>
+            <AccentPaper>
+              <Stack direction="row" spacing={2}>
+                <CatchingPokemon />
+                <Typography children={`${caughtData} Caught`} />
+              </Stack>
+            </AccentPaper>
           </Stack>
           <ButtonAction
             size="large"
