@@ -93,7 +93,7 @@ function PokemonListPage() {
                       sx={{ minHeight: "10vh" }}
                     >
                       <PokemonCard disabled>{val.nickname}</PokemonCard>
-                      <PokemonCard disabled>{val.name}</PokemonCard>
+                      <PokemonCard disabled>{val.name.toUpperCase()}</PokemonCard>
                       <IconButton onClick={() => dispatch(pokemonActions.removePokemon(val.nickname))} children={<CloseIcon /> } />
                     </Stack>
                   </BackgroundItem>
