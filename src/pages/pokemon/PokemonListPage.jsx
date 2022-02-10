@@ -38,7 +38,7 @@ function PokemonListPage() {
 
   useEffect(() => {
     dispatch(pokemonActions.getPokemonList());
-  }, []);
+  });
 
   return (
     <MainLayout>

@@ -37,10 +37,11 @@ function LandingPage() {
 
   useEffect(() => {
     dispatch(pokemonActions.getPokemonList());
-  }, []);
+  });
 
   useEffect(() => {
     dispatch(pokedexActions.getCaught(pokemonList));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemonList]);
 
   return (
