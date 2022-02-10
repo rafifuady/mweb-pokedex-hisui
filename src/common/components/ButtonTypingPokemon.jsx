@@ -1,4 +1,3 @@
-import React from "react";
 import { Button  } from "@mui/material";
 
 function ButtonTypingPokemon({ type, ...props }) {
@@ -131,6 +130,9 @@ function ButtonTypingPokemon({ type, ...props }) {
         backgroundColor: "#e9e",
         color: "white !important",
       };
+      break;
+    default:
+      styleTyping = {}
   }
   return <Button disabled disableRipple sx={styleTyping} {...props} />;
 }
