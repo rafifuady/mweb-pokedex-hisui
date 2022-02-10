@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Stack,
   Box,
@@ -15,7 +15,6 @@ import {
 //components
 import ButtonTypingPokemon from "../../../common/components/ButtonTypingPokemon";
 import DialogNicknameForm from "../../pokemon/containers/DialogNicknameForm";
-import { useNavigate } from "react-router-dom";
 
 const TitleBox = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -29,8 +28,6 @@ const TitleBox = styled(Box)(({ theme }) => ({
 }));
 
 function PokemonDetail({ detail }) {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const pokemon = useSelector((state) => state.pokemon);
 
