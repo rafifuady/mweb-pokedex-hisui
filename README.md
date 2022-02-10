@@ -1,3 +1,6 @@
+# RELEASED
+https://mweb-pokedex-hisui.vercel.app/
+
 # Code Convention
 
 ## Folder Structure
