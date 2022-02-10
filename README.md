@@ -1,20 +1,23 @@
 # Code Convention
 
 ## Folder Structure
+
 common : shared components
-module : page specific components
-pages : page components
-routes: for routing 
+module : page specific used components
+pages : the page component
+routes: for routing
 styles: global theme
 
 ## Naming file
+
 jsx: React Component
 js: Non React Component
 
 ## colors
+
 3b3b33, 4c4940 brown
 344e67, 456479 blue
-ebe7ca, ede6de yelowish with
+ebe7ca, ede6de yelowish white
 
 # Getting Started with Create React App
 
