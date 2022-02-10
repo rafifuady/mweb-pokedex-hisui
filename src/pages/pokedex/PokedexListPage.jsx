@@ -5,6 +5,7 @@ import {
   ButtonBase,
   styled,
   Container,
+  LinearProgress,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
@@ -65,73 +66,79 @@ function PokedexListPage() {
             background: createGradient("#ede6de", "#ebe7ca"),
           }}
         >
-          <Stack
-            direction="column"
-            justifyContent="space-evenly"
-            alignItems="stretch"
-            spacing={2}
-            p={2}
-          >
+          {pokedex.isLoading ? (
+            <Box sx={{ width: "100%" }}>
+              <LinearProgress />
+            </Box>
+          ) : (
             <Stack
-              sx={{ minHeight: "80vh" }}
               direction="column"
               justifyContent="space-evenly"
               alignItems="stretch"
+              spacing={2}
+              p={2}
             >
-              {pokedex.results.map((val, index) => {
-                let caughtPoke = 0;
-                caughtPoke = pokemon.pokemonList?.filter(
-                  (poke) => poke.name === val.name
-                ).length;
-                return (
-                  <BackgroundItem key={index} sx={{ height: "10vh" }}>
-                    <PokemonCard
-                      onClick={() =>
-                        navigate(
-                          `/pokedex/${
-                            page === 1
-                              ? index + 1
-                              : limit * (page - 1) + index + 1
-                          }`
-                        )
-                      }
-                    >
-                      <Container>
-                        <Typography
-                          component="div"
-                          variant="subtitle"
-                          children={`# ${
-                            page === 1
-                              ? index + 1
-                              : limit * (page - 1) + index + 1
-                          }`}
-                        />
-                      </Container>
-                      <Container>
-                        <Typography
-                          component="div"
-                          children={val.name.toUpperCase()}
-                        />
-                      </Container>
-                      <Container>
-                        <Typography
-                          component="div"
-                          variant="subtitle"
-                          children={`Caught : ${caughtPoke}`}
-                        />
-                      </Container>
-                    </PokemonCard>
-                  </BackgroundItem>
-                );
-              })}
+              <Stack
+                sx={{ minHeight: "80vh" }}
+                direction="column"
+                justifyContent="space-evenly"
+                alignItems="stretch"
+              >
+                {pokedex.results.map((val, index) => {
+                  let caughtPoke = 0;
+                  caughtPoke = pokemon.pokemonList?.filter(
+                    (poke) => poke.name === val.name
+                  ).length;
+                  return (
+                    <BackgroundItem key={index} sx={{ height: "10vh" }}>
+                      <PokemonCard
+                        onClick={() =>
+                          navigate(
+                            `/pokedex/${
+                              page === 1
+                                ? index + 1
+                                : limit * (page - 1) + index + 1
+                            }`
+                          )
+                        }
+                      >
+                        <Container>
+                          <Typography
+                            component="div"
+                            variant="subtitle"
+                            children={`# ${
+                              page === 1
+                                ? index + 1
+                                : limit * (page - 1) + index + 1
+                            }`}
+                          />
+                        </Container>
+                        <Container>
+                          <Typography
+                            component="div"
+                            children={val.name.toUpperCase()}
+                          />
+                        </Container>
+                        <Container>
+                          <Typography
+                            component="div"
+                            variant="subtitle"
+                            children={`Caught : ${caughtPoke}`}
+                          />
+                        </Container>
+                      </PokemonCard>
+                    </BackgroundItem>
+                  );
+                })}
+              </Stack>
+              <Pagination
+                count={Math.ceil(pokedex.count / 5)}
+                page={page}
+                onChange={handleChangePage}
+                siblingCount={0}
+              />
             </Stack>
-            <Pagination
-              count={Math.ceil(pokedex.count / 5)}
-              page={page}
-              onChange={handleChangePage}
-              siblingCount={0}
-            />
-          </Stack>
+          )}
         </Box>
       </Stack>
     </MainLayout>
