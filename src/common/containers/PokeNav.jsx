@@ -1,28 +1,30 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 function PokeNav() {
-  const [value, setValue] = React.useState(false);
+  const { pathname } = useLocation();
+
+  const [value, setValue] = React.useState(pathname.substring(1));
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <Paper
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
       elevation={3}
     >
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      >
+      <BottomNavigation showLabels value={value} onChange={handleChange}>
         <BottomNavigationAction
           label="Pokedex"
+          value="pokedex"
           component={NavLink}
           to="/pokedex"
         />
         <BottomNavigationAction
           label="Pokemon"
+          value="pokemon"
           component={NavLink}
           to="/pokemon"
         />
