@@ -4,8 +4,10 @@ import {
   ButtonBase,
   styled,
   Button,
-  Box
+  Box,
+  IconButton
 } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -59,7 +61,7 @@ function PokemonListPage() {
             <Stack
               sx={{ minHeight: "80vh" }}
               direction="column"
-              justifyContent="space-evenly"
+              justifyContent="flex-start"
               alignItems="stretch"
               spacing={2}
             >
@@ -92,7 +94,7 @@ function PokemonListPage() {
                     >
                       <PokemonCard disabled>{val.nickname}</PokemonCard>
                       <PokemonCard disabled>{val.name}</PokemonCard>
-                      <Button>X</Button>
+                      <IconButton onClick={() => dispatch(pokemonActions.removePokemon(val.nickname))} children={<CloseIcon /> } />
                     </Stack>
                   </BackgroundItem>
                 );
