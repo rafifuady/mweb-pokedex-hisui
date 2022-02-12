@@ -38,7 +38,8 @@ function PokemonListPage() {
 
   useEffect(() => {
     dispatch(pokemonActions.getPokemonList());
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   return (
     <MainLayout>
