@@ -130,10 +130,11 @@ function getPokemonList() {
       // transform list to readable by JS
       let parsedList = JSON.parse(listPoke);
 
-      parsedList = parsedList.map((val) => {
-        let parsedVal = JSON.parse(val);
-        return parsedVal;
-      });
+      // parsedList = parsedList.map((val) => {
+      //   console.log(val)
+      //   let parsedVal = JSON.parse(val);
+      //   return parsedVal;
+      // });
 
       return dispatch({
         type: pokemonConstants.LIST_SUCCESS,
